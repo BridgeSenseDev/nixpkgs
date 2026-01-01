@@ -16,6 +16,12 @@ rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-2a7obW93uzdA03GFRdLvMqCcRuRl7YPJHv4Geu5EvH0=";
 
+  # fix for compilation of musl builds on aarch64
+  # see https://github.com/NixOS/nixpkgs/issues/145726
+  postPatch = ''
+    rm .cargo/config.toml
+  '';
+
   meta = {
     description = "TUI for managing wifi";
     homepage = "https://github.com/pythops/impala";
